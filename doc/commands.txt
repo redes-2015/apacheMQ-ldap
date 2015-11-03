@@ -1,0 +1,67 @@
+#-----------------#
+# Server Commands #
+#-----------------#
+
+
+# -------------------------------------------------------------
+# Apache ActiveMQ Server
+# (Default Port: 61616)
+
+# Starting the server (save the PID given to stop server later)
+./bin/activemq start
+
+# Ending the server
+
+    # Method 1 (raises exceptions?)
+    ./bin/activemq stop
+
+    # Method 2
+    ps -ef | grep activemq
+    kill [PID]
+
+# Check if server is alive
+netstat -an | grep 61616
+
+# 'LDAPLoginModule.java' belongs to source code and is found in:
+activemq-jass/src/main/java/org/apache/activemq/jaas
+
+# According to pdf tutorial, the below files must be modified so
+# the LDAP server can work:
+conf/login.config
+conf/activemq.xml
+
+# The two client files for LDAP connections are:
+# (Not sure what're the differences between them)
+examples/openwire/swissarmy/src/ConsumerTool.java
+examples/openwire/swissarmy/src/ProducerTool.java
+
+# Running the consumer client
+# (go to 'examples/openwire/swissarmy/' directory first)
+ant consumer -Durl=tcp://localhost:61616 -Dmax=100
+
+# Running the producer client
+# (go to 'examples/openwire/swissarmy/' directory first)
+ant producer -Durl=tcp://localhost:61616
+
+
+# -------------------------------------------------------------
+# Apache DS
+# (Default Port: 10389)
+# Look for it on /opt/apacheds*, if default instalation was used
+
+# Just running the script shows some commands
+./bin/apacheds
+
+# Starting the server
+sudo ./bin/apacheds start default
+
+# Stopping the server
+sudo ./bin/apacheds stop default
+
+
+# -------------------------------------------------------------
+# Apache Directory Studio
+
+# User:     admin
+# Instance: default
+# Password: secret
